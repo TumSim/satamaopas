@@ -1,13 +1,21 @@
 package sh.satamahaku.domain;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "USERS")
 
 public class User {
     @Id
@@ -18,6 +26,16 @@ public class User {
     private String lastName;
     private String email;
     private String passwordHash;
+
+    @ManyToMany(mappedBy = "favouriteByUser")
+    private List <Harbour> favoriteHarbours;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("users")
+    @JoinColumn(name = "userTypeid")
+    private UserType userType;
+
+    
 
     //Constructors
 
@@ -59,7 +77,18 @@ public class User {
         return passwordHash;
     }
 
+    public List<Harbour> getFavoriteHarbours() {
+        return favoriteHarbours;
+    }
+    public UserType getUserType() {
+        return userType;
+    }
+
     //Setters
+
+    public void setFavoriteHarbours(List<Harbour> favoriteHarbours) {
+        this.favoriteHarbours = favoriteHarbours;
+    }
 
     public void setUserid(Long userid) {
         this.userid = userid;
@@ -80,11 +109,17 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
     @Override
     public String toString() {
         return "User [userid=" + userid + ", userName=" + userName + ", firstName=" + firstName + ", lastName="
                 + lastName + ", email=" + email + ", passwordHash=" + passwordHash + "]";
     }
+
+
 
     
 

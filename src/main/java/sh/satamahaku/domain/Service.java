@@ -1,9 +1,16 @@
 package sh.satamahaku.domain;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,6 +23,12 @@ public class Service {
     private String service;
     private String description;
 
+    @ManyToMany
+    @JsonIgnoreProperties("services")
+    @JoinTable(name = "HARBOURSERVICE",
+        joinColumns = @JoinColumn(name = "serviceid"),
+        inverseJoinColumns = @JoinColumn(name = "harbourid"))
+    private List <Harbour> harbourServices;
 
     //Constructors
 
@@ -42,6 +55,10 @@ public class Service {
         this.description = description;
     }
 
+    public void setHarbourServices(List<Harbour> harbourServices) {
+        this.harbourServices = harbourServices;
+    }
+
     //Getters
 
     public Long getServiceid() {
@@ -54,10 +71,16 @@ public class Service {
         return description;
     }
 
+    public List<Harbour> getHarbourServices() {
+        return harbourServices;
+    }
+
     @Override
     public String toString() {
         return "Service [serviceid=" + serviceid + ", service=" + service + ", description=" + description + "]";
     }
+
+
 
     
 }

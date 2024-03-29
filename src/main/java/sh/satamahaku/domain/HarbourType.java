@@ -1,9 +1,14 @@
 package sh.satamahaku.domain;
 
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,6 +19,13 @@ public class HarbourType {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long harboyrTypeid;
     private String harbourType;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "harbourid")
+    @JsonIgnoreProperties("harbourType")
+    private List <Harbour> harbours;
+
+    
+
 
 
     //Constructors
@@ -36,6 +48,11 @@ public class HarbourType {
         return harbourType;
     }
 
+    public List<Harbour> getHarbours() {
+        return harbours;
+    }
+
+
     //Setters
 
     public void setHarboyrTypeid(Long harboyrTypeid) {
@@ -43,6 +60,10 @@ public class HarbourType {
     }
     public void setHarbourType(String harbourType) {
         this.harbourType = harbourType;
+    }
+
+    public void setHarbours(List<Harbour> harbours) {
+        this.harbours = harbours;
     }
 
     //toString

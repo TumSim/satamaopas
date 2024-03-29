@@ -1,11 +1,21 @@
 package sh.satamahaku.domain;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
+// satamna on kirja
 @Entity
 @Table(name = "HARBOUR")
 
@@ -18,6 +28,23 @@ public class Harbour {
     private Integer numberOfPlaces;
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "harboyrTypeid")
+    @JsonIgnoreProperties("harbours")
+    private HarbourType harbourType;
+
+    @ManyToMany
+    @JoinTable(name = "FAVOURITE",
+    joinColumns = @JoinColumn(name = "harbourid"),
+    inverseJoinColumns = @JoinColumn(name = "userid"))
+    private List <User> favouriteByUser;
+
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "harbourServices")
+    @JsonIgnoreProperties("harbourServices")
+    private List<Service> services;
+
+    
 
 // Constructors
 
@@ -40,6 +67,13 @@ public Harbour() {
 
 //Setters
 
+    public void setFavouriteByUser(List<User> favouriteByUser) {
+        this.favouriteByUser = favouriteByUser;
+    }
+
+    public void setHarbourType(HarbourType harbourType) {
+        this.harbourType = harbourType;
+    }
     public void setHarbourid(Long harbourid) {
         this.harbourid = harbourid;
     }
@@ -56,7 +90,19 @@ public Harbour() {
         this.description = description;
     }
 
+    public void setServices(List<Service> services) {
+        this.services = services;
+    }
+
 // Getters
+
+    public List<User> getFavouriteByUser() {
+        return favouriteByUser;
+    }
+
+    public HarbourType getHarbourType() {
+        return harbourType;
+    }
 
     public Long getHarbourid() {
         return harbourid;
@@ -72,6 +118,10 @@ public Harbour() {
     }
     public String getDescription() {
         return description;
+    }
+
+    public List<Service> getServices() {
+        return services;
     }
 
     //toString

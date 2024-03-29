@@ -1,6 +1,17 @@
 package sh.satamahaku.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "SERVICE")
+
 public class Service {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long serviceid;
     private String service;
     private String description;

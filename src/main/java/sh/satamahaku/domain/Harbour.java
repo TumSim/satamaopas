@@ -1,7 +1,17 @@
 package sh.satamahaku.domain;
 
-public class Harbour {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "HARBOUR")
+
+public class Harbour {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long harbourid;
     private String name;
     private String coordinates;

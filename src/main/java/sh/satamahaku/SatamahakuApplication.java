@@ -45,7 +45,7 @@ public class SatamahakuApplication {
 			userTypeRepository.save(userType2);
 
 			// demo users
-			User user1 = new User("idaerika", "Ida", "Tolvanen", "i.tolvanen@gmail.com", null);
+			User user1 = new User("idaerika", "Ida", "Tolvanen", "i.tolvanen@gmail.com", "$2a$10$yvYQIl2nglmwmMiHlf2s/uPuQgkY1gdz/so8/yBa80q2a2RbuT.EW");
 			User user2 = new User("tuomasaarre", "Tuomas", "Simoinen", "t.simoinen@gmail.com", null);
 
 			

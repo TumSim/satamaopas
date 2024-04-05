@@ -1,10 +1,12 @@
 package sh.satamahaku.domain;
 import java.util.List;
+import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,25 +30,31 @@ public class Harbour {
     private Integer numberOfPlaces;
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "harboyrTypeid")
     @JsonIgnoreProperties("harbours")
     private HarbourType harbourType;
 
-    @ManyToMany
-    @JoinTable(name = "FAVOURITE",
-    joinColumns = @JoinColumn(name = "harbourid"),
-    inverseJoinColumns = @JoinColumn(name = "userid"))
-    private List <User> favouriteByUser;
+    @ManyToMany(mappedBy = "favoriteHarbours", cascade = CascadeType.MERGE)
+    @JsonIgnoreProperties("favoriteHarbours") ///FAVORITEE
+    private List <User> favouriteByUser = new ArrayList<>();
 
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "harbourServices")
-    @JsonIgnoreProperties("harbourServices")
-    private List<Service> services;
+    @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "harbourServices")
+    @JsonIgnoreProperties("harbourServices") /// SERVICE
+    private List<Service> services = new ArrayList<>();
 
     
+    // public void addServices(Service service){
+    //     services.add(service);
+    // }
+
+    // public void addFavorites(User usersfavorite){
+    //     favouriteByUser.add(usersfavorite);
+    // }
 
 // Constructors
+
 
 public Harbour() {
     this.harbourid = null;
@@ -54,15 +62,19 @@ public Harbour() {
     this.coordinates = null;
     this.numberOfPlaces = null;
     this.description = null;
+    this.harbourType = null;
+    this.services = null;
 }
 
 
-    public Harbour(String name, String coordinates, Integer numberOfPlaces, String description) {
+    public Harbour(String name, String coordinates, Integer numberOfPlaces, String description, HarbourType harbourType, Service services) {
         this.name = name;
         this.coordinates = coordinates;
         this.numberOfPlaces = numberOfPlaces;
         this.description = description;
+        this.harbourType = harbourType;
     }
+
 
 
 //Setters

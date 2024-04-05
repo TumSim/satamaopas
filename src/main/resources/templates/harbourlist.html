@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harbour list</title>
+</head>
+<body>
+    <h1>Harbours</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <!-- <th>Coordinates</th>
+            <th>Places</th>
+            <th>Description</th> -->
+            <th>Type</th>
+        </tr>
+            <tr th:each = "harbour : ${harbours}">
+                <td th:text = "${harbour.name}"></td>
+                <!-- <td th:text = "${harbour.coordinates}"></td>
+                <td th:text = "${harbour.numberOfPlaces}"></td>
+                <td th:text = "${harbour.description}"></td> -->
+                <td>
+                    <span th:if="${harbour.harbourType != null}" th:text="${harbour.harbourType.harbourType}"></span>
+                    <span th:if="${harbour.harbourType == null}">Unknown</span>
+                </td>
+                <td>
+                    <a th:href="@{/detailharbourpage/{harbourid}(harbourid=${harbour.harbourid})}">Details</a>
+                </td>
+            </tr>
+    </table>
+</body>
+</html>

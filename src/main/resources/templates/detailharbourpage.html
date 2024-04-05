@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harbour list</title>
+</head>
+<body>
+    <h1>Harbours</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Coordinates</th>
+            <th>Places</th>
+            <th>Description</th>
+            <th>Type</th>
+        </tr>
+            <tr>
+                <td th:text = "${harbourid.name}"></td>
+                <td th:text = "${harbourid.coordinates}"></td>
+                <td th:text = "${harbourid.numberOfPlaces}"></td>
+                <td th:text = "${harbourid.description}"></td>
+                <td th:text="${harbourtype.harbourType}"></td>
+            </tr>
+        </table>
+        <table>
+        <p>Services</p>
+        <tr th:each = "services : ${harbourservices}">
+            <td th:text = "${services.Service}"></td>
+            <td th:text = "${services.description}"></td>
+        </table>
+    <a th:href="@{/harbourlist}">Back</a>
+</body>
+</html>

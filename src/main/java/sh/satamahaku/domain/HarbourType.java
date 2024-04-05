@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,7 +21,7 @@ public class HarbourType {
     private Long harboyrTypeid;
     private String harbourType;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "harbourid")
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "harbourid", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("harbourType")
     private List <Harbour> harbours;
 

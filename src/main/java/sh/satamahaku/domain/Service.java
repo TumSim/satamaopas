@@ -1,9 +1,11 @@
 package sh.satamahaku.domain;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,12 +25,17 @@ public class Service {
     private String service;
     private String description;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JsonIgnoreProperties("services")
     @JoinTable(name = "HARBOURSERVICE",
         joinColumns = @JoinColumn(name = "serviceid"),
         inverseJoinColumns = @JoinColumn(name = "harbourid"))
-    private List <Harbour> harbourServices;
+    private List <Harbour> harbourServices = new ArrayList<>();
+
+
+    public void addHarbours(Harbour harbours){ // Add Services to harbours, this is because manyTomany
+        harbourServices.add(harbours);
+    }
 
     //Constructors
 

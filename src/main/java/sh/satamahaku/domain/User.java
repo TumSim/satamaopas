@@ -1,6 +1,9 @@
 package sh.satamahaku.domain;
 
 import java.util.List;
+import java.util.ArrayList;
+
+import org.apache.tomcat.util.digester.ArrayStack;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -10,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -27,15 +31,24 @@ public class User {
     private String email;
     private String passwordHash;
 
-    @ManyToMany(mappedBy = "favouriteByUser")
-    private List <Harbour> favoriteHarbours;
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "FAVOURITE",
+            joinColumns = @JoinColumn(name = "userid"),
+            inverseJoinColumns = @JoinColumn(name = "harbourid"))
+    private List<Harbour> favoriteHarbours = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JsonIgnoreProperties("users")
     @JoinColumn(name = "userTypeid")
     private UserType userType;
 
-    
+    // public void addHarbours(Harbour harbours){
+    //     harbourServices.add(harbours);
+    // }
+
+    public void addFavoriteHarbour(Harbour favoriteHarbourToAdd){ // adding Harbour to users favorite list
+        favoriteHarbours.add(favoriteHarbourToAdd);
+    }
 
     //Constructors
 

@@ -72,7 +72,9 @@ public class SatamahakuApplication {
 			Harbour harbour1 = new Harbour("Hanko vierasvenesatama, Itäsatama",
 									" 59°49,2', 22°58,3'",
 									80, 
-									"Olet lämpimästi tervetullut Hankoon uudistettuun vierasvenesatamaamme.", 
+									"Olet lämpimästi tervetullut Hankoon vierasvenesatamaamme. Jo laituriin saapuessasi sinua vastaanottaa osaava henkilökunta, joka haluaa tarjota sinulle parasta mahdollista palvelua. Kaipaatko lämmintä suihkua, uunituoretta leipää tai kenties varaosia? Me olemme täällä sinua varten, niin maakravuille kuin kokeneille merikarhuillekin.\n" + //
+																				"\n" + //
+																				"Suomen suurin vierasvenesatama, Hangon Itäsatama, on Itämeren helmi. Toivotamme teidät lämpimästi tervetulleeksi meidän satamaamme tänä kesänä kokemaan täällä puhaltelevat raikkaat tuulet!", 
 									harbourType1,
 									null);
 			Harbour harbour2 = new Harbour("Kasnäs", "59°55,3', 22°24,6'", 100, "Tervetuloa rantautumaan Kasnäsin vierasvenesatamaan.", harbourType1, null);

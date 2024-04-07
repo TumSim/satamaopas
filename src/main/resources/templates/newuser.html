@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>new user</h1>
+    <form method="post" action="#" th:action = "@{/savenewuser}" th:object = ${newuser}>
+        <p>User name: <input type="text" th:field = "${newuser.userName}" name="userName"></p>
+        <p>First name: <input type="text" th:field = "${newuser.firstName}"></p>
+        <p>Last name: <input type="text" th:field = "${newuser.lastName}"></p>
+        <p>Email address: <input type="text" th:field = "${newuser.email}"></p>
+        <p>New password: <input type="password" th:field = "${newuser.passwordHash}"></p>
+
+        <input type="submit" value="Sign Up!">
+    </form>
+</body>
+</html>

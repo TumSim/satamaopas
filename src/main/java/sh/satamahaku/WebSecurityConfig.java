@@ -24,7 +24,9 @@ public class WebSecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception{
         http
         .authorizeHttpRequests(authorize -> authorize
-                                .requestMatchers("/css/**").permitAll()
+                                .requestMatchers("/loginpage").permitAll()
+                                .requestMatchers("/newuser").permitAll()
+                                .requestMatchers("/savenewuser").permitAll()
                                 .requestMatchers(toH2Console()).permitAll() // for h2console
                                 .anyRequest().authenticated()
                                 )
@@ -36,7 +38,7 @@ public class WebSecurityConfig {
                                 .disable())                                    //for h2console
                                 )
                                 .formLogin(formlogin -> formlogin
-
+                                .loginPage("/login")
                                 .defaultSuccessUrl("/harbourlist", true)
                                 .permitAll()
                                 )

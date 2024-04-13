@@ -50,6 +50,11 @@ public class User {
         favoriteHarbours.add(favoriteHarbourToAdd);
     }
 
+    public void removeFavoriteHarbour(Harbour harbour) {
+        favoriteHarbours.remove(harbour);
+        harbour.getFavouriteByUser().remove(this);
+    }
+
     //Constructors
 
     public User() {

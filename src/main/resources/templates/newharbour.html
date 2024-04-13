@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Harbour</title>
+</head>
+<body>
+    <form method="post" action="#" th:action="@{/savenewharbour}" th:object="${newharbour}">
+        <p>Name: <input type="text" th:field="${newharbour.name}"></p>
+        <p>Coordinates: <input type="text" th:field="${newharbour.coordinates}"></p>
+        <p>How many places: <input type="text" th:field="${newharbour.numberOfPlaces}"></p>
+        <p>Description: <input type="text" th:field="${newharbour.description}"></p>
+        <label for="deplist">Type</label>
+        <select id="deplist" th:field="*{harbourType}" class="form-control">
+            <option th:each="harbourtype : ${harbourtypes}"
+                    th:value="${harbourtype.harboyrTypeid}"
+                    th:text="${harbourtype.harbourType}">
+            </option>
+        </select>
+        <input type="submit" value="Save New Harbour">
+    </form>
+</body>
+</html>

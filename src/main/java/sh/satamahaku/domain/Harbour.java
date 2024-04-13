@@ -54,6 +54,9 @@ public class Harbour {
     // public void addFavorites(User usersfavorite){
     //     favouriteByUser.add(usersfavorite);
     // }
+    public boolean isFavoritedByUser(User user) {
+        return favouriteByUser.contains(user);
+    }
 
 // Constructors
 

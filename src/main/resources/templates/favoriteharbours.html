@@ -4,23 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harbour list</title>
-    <link type="text/css" rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}" />
 </head>
 <body>
-    <h1>Harbours</h1>
+    <h1>Favorites</h1>
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
-    </form>
-    <form id="goToFavorites" th:action="@{/favoriteharbours}" method="get">
-        <button type="submit">My Favorites</button>
     </form>
     <table>
         <tr>
             <th>Name</th>
             <th>Type</th>
         </tr>
-            <tr th:each = "harbour : ${harbours}">
+            <tr th:each = "harbour : ${favoriteharbours}">
                 <td th:text = "${harbour.name}"></td>
+
                 <td>
                     <span th:if="${harbour.harbourType != null}" th:text="${harbour.harbourType.harbourType}"></span>
                     <span th:if="${harbour.harbourType == null}">Unknown</span>
@@ -28,16 +25,7 @@
                 <td>
                     <a th:href="@{/detailharbourpage/{harbourid}(harbourid=${harbour.harbourid})}">Details</a>
                 </td>
-                <td>
-                    <form id="addToFavorites" th:action="@{/savefavorite/{harbourid}(harbourid=${harbour.harbourid})}" method="post">
-                        <button type="submit" th:text="${viceversa.contains(harbour) ? 'Remove from Favorites' : 'Add to My Favorites'}"></button>
-                    </form>
-                </td>
             </tr>
     </table>
-
-    <form id="addNewHarbour" th:action="@{/newharbour}" method="get">
-        <button type="submit">Add new harbour</button>
-    </form>
 </body>
 </html>

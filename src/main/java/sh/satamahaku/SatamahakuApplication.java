@@ -46,7 +46,7 @@ public class SatamahakuApplication {
 
 			// demo users
 			User user1 = new User("idaerika", "Ida", "Tolvanen", "i.tolvanen@gmail.com", "$2a$10$yvYQIl2nglmwmMiHlf2s/uPuQgkY1gdz/so8/yBa80q2a2RbuT.EW");
-			User user2 = new User("tuomasaarre", "Tuomas", "Simoinen", "t.simoinen@gmail.com", null);
+			User user2 = new User("tuomasaarre", "Tuomas", "Simoinen", "t.simoinen@gmail.com", "$2a$10$0Exj6qq9YFPALuwTk58WceDVBpuuOgdxjjI7pENtXz184O1YMHgxm");
 
 			
 			
@@ -109,8 +109,10 @@ public class SatamahakuApplication {
 
 
 			user1.setUserType(userType2);
+			user2.setUserType(userType2);
 
 			userRepository.save(user1);
+			userRepository.save(user2);
 		};
 	}
 

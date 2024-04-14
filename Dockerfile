@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk-focal as builder
+FROM eclipse-temurin:17-jdk-hotspot as builder
 WORKDIR /opt/app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./

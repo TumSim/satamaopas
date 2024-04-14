@@ -47,7 +47,7 @@ public class SatamahakuApplication {
 			// demo users
 			User user1 = new User("idaerika", "Ida", "Tolvanen", "i.tolvanen@gmail.com", "$2a$10$yvYQIl2nglmwmMiHlf2s/uPuQgkY1gdz/so8/yBa80q2a2RbuT.EW");
 			User user2 = new User("tuomasaarre", "Tuomas", "Simoinen", "t.simoinen@gmail.com", "$2a$10$0Exj6qq9YFPALuwTk58WceDVBpuuOgdxjjI7pENtXz184O1YMHgxm");
-
+			User user3 = new User("Admin", "ad", "min", "admin@admin.com", "$2a$10$5DiF2ZLwX7s4je23z8ZUNut6Wzd0S81i5t5FaIKQG/2mIGRpKcpM6");
 			
 			
 			// Services for harbours
@@ -104,15 +104,19 @@ public class SatamahakuApplication {
 			// save users
 			userRepository.save(user1);
 			userRepository.save(user2);
+			userRepository.save(user3);
+			
 
 			user1.addFavoriteHarbour(harbour2);
 
 
 			user1.setUserType(userType2);
 			user2.setUserType(userType2);
+			user3.setUserType(userType1);
 
 			userRepository.save(user1);
 			userRepository.save(user2);
+			userRepository.save(user3);
 		};
 	}
 

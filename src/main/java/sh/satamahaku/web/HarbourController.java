@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,7 +37,7 @@ public class HarbourController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
-        
+
         User user = userRepository.findByuserName(username);
 
         model.addAttribute("harbours", harbourRepository.findAll());
@@ -56,6 +57,7 @@ public class HarbourController {
     }
 
     @GetMapping("/newharbour")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String makeNewHarbour(Model model){
         model.addAttribute("newharbour", new Harbour());
         model.addAttribute("harbourtypes", harbourTypeRepository.findAll());
@@ -63,6 +65,7 @@ public class HarbourController {
     }
 
     @PostMapping("/savenewharbour")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String saveNewHarbour(@ModelAttribute Harbour harbour){
         harbourRepository.save(harbour);
         return "redirect:/harbourlist";

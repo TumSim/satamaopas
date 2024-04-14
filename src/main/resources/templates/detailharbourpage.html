@@ -3,32 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harbour list</title>
+    <title>Harbour details</title>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}" />
 </head>
 <body>
-    <h1>Harbours</h1>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Coordinates</th>
-            <th>Places</th>
-            <th>Description</th>
-            <th>Type</th>
-        </tr>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" th:href="@{/harbourlist}">Harbour Search</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <form id="goToFavorites" th:action="@{/favoriteharbours}" method="get">
+          <button type="submit" class="btn btn-link nav-link">My Favorites</button>
+        </form>
+      </li>
+      <li class="nav-item">
+        <form id="addNewHarbour" th:action="@{/newharbour}" method="get">
+            <button type="submit" class="btn btn-link nav-link"sec:authorize="hasAuthority('ADMIN')">Add New Harbour</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+  <span class="navbar-text mr-4">
+    <span sec:authentication="name"></span>
+</span>
+  <form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out" class="btn btn-sm btn-danger nav-link"/>
+  </form>
+</nav>
+
+<div class="container mt-3">
+    
+    <h1>Harbour details</h1>
+    <button onclick="history.back()" class="btn btn-primary">Back</button>
+    <table class="table">
+        <thead>
             <tr>
-                <td th:text = "${harbourid.name}"></td>
-                <td th:text = "${harbourid.coordinates}"></td>
-                <td th:text = "${harbourid.numberOfPlaces}"></td>
-                <td th:text = "${harbourid.description}"></td>
+                <th>Name</th>
+                <th>Coordinates</th>
+                <th>Places</th>
+                <th>Description</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td th:text="${harbourid.name}"></td>
+                <td th:text="${harbourid.coordinates}"></td>
+                <td th:text="${harbourid.numberOfPlaces}"></td>
+                <td th:text="${harbourid.description}"></td>
                 <td th:text="${harbourtype.harbourType}"></td>
             </tr>
-        </table>
-        <table>
-        <p>Services</p>
-        <tr th:each = "services : ${harbourservices}">
-            <td th:text = "${services.Service}"></td>
-            <td th:text = "${services.description}"></td>
-        </table>
-    <!-- <a th:href="@{/harbourlist}">Back</a> -->
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="service : ${harbourservices}">
+                <td th:text="${service.service}"></td>
+                <td th:text="${service.description}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 </body>
 </html>

@@ -42,9 +42,9 @@ public class Service {
         this.serviceid = null;
         this.service = null;
     }
-
     public Service(String service) {
         this.service = service;
+        
     }
 
     //Setters

@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Harbour</title>
+
+    <style>
+        
+        .description-input {
+            width: 200px;
+            height: 200px;
+            word-wrap: break-word;
+            overflow: auto;
+        }
+    </style>
 </head>
+
 <body>
     <form method="post" action="#" th:action="@{/savenewharbour}" th:object="${newharbour}">
         <p>Name: <input type="text" th:field="${newharbour.name}"></p>
         <p>Coordinates: <input type="text" th:field="${newharbour.coordinates}"></p>
         <p>How many places: <input type="text" th:field="${newharbour.numberOfPlaces}"></p>
-        <p>Description: <input type="text" th:field="${newharbour.description}"></p>
+        <p>Description: <textarea th:field="${newharbour.description}" class="description-input"></textarea></p>
         <label for="deplist">Type</label>
         <select id="deplist" th:field="*{harbourType}" class="form-control">
             <option th:each="harbourtype : ${harbourtypes}"

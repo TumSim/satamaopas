@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Harbour</title>
+</head>
+<body>
+    <form method="post" action="#" th:action="@{/saveeditharbour}" th:object="${harbourid}">
+        <input type="hidden" th:field="*{harbourid}"/>
+        <p>Name: <input type="text" th:field="*{name}"></p>
+        <p>Coordinates: <input type="text" th:field="*{coordinates}"></p>
+        <p>How many places: <input type="text" th:field="*{numberOfPlaces}"></p>
+        <p>Description: <input type="text" th:field="*{description}"></p>
+        <label for="deplist">Type</label>
+        <select id="deplist" th:field="*{harbourType.harboyrTypeid}" class="form-control">
+            <option th:each="harbourtype : ${harbourtypes}"
+                    th:value="${harbourtype.harboyrTypeid}"
+                    th:text="${harbourtype.harbourType}">
+            </option>
+        </select>
+        <label>Services:</label><br>
+        <div th:each="service : ${services}">
+            <input type="checkbox" th:id="'service_' + ${service.serviceid}" 
+                   th:name="'selectedServices'" th:value="${service.serviceid}" 
+                   th:checked="${harbourid.services != null and harbourid.services.contains(service)}">
+            <label th:for="'service_' + ${service.serviceid}" th:text="${service.service}"></label><br>
+        </div>
+        <input type="submit" value="Save Changes">
+    </form>
+</body>
+</html>

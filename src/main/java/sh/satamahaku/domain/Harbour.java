@@ -51,6 +51,10 @@ public class Harbour {
         services.add(service);
     }
 
+    // public void addServicesList(List <Service> servicelist){
+    //     services.addAll(servicelist);
+    // }
+
     // public void addFavorites(User usersfavorite){
     //     favouriteByUser.add(usersfavorite);
     // }
@@ -69,6 +73,7 @@ public Harbour() {
     this.numberOfPlaces = null;
     this.description = null;
     this.harbourType = null;
+    this.services = null;
 }
 
 

@@ -23,7 +23,6 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long serviceid;
     private String service;
-    private String description;
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JsonIgnoreProperties("services")
@@ -42,12 +41,10 @@ public class Service {
     public Service() {
         this.serviceid = null;
         this.service = null;
-        this.description = null;
     }
 
-    public Service(String service, String description) {
+    public Service(String service) {
         this.service = service;
-        this.description = description;
     }
 
     //Setters
@@ -57,9 +54,6 @@ public class Service {
     }
     public void setService(String service) {
         this.service = service;
-    }
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public void setHarbourServices(List<Harbour> harbourServices) {
@@ -74,9 +68,6 @@ public class Service {
     public String getService() {
         return service;
     }
-    public String getDescription() {
-        return description;
-    }
 
     public List<Harbour> getHarbourServices() {
         return harbourServices;
@@ -84,7 +75,7 @@ public class Service {
 
     @Override
     public String toString() {
-        return "Service [serviceid=" + serviceid + ", service=" + service + ", description=" + description + "]";
+        return "Service [serviceid=" + serviceid + ", service=" + service + "]";
     }
 
 

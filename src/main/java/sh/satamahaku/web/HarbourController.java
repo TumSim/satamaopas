@@ -1,5 +1,8 @@
 package sh.satamahaku.web;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +20,8 @@ import sh.satamahaku.domain.Harbour;
 import sh.satamahaku.domain.HarbourRepository;
 import sh.satamahaku.domain.HarbourType;
 import sh.satamahaku.domain.HarbourTypeRepository;
+import sh.satamahaku.domain.Service;
+import sh.satamahaku.domain.ServiceRepository;
 import sh.satamahaku.domain.User;
 import sh.satamahaku.domain.UserRepository;
 
@@ -31,6 +37,9 @@ public class HarbourController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ServiceRepository serviceRepository;
 
     @GetMapping("/harbourlist") // Get all harbours for front page
     public String listOfHarbours(Model model){
@@ -61,12 +70,23 @@ public class HarbourController {
     public String makeNewHarbour(Model model){
         model.addAttribute("newharbour", new Harbour());
         model.addAttribute("harbourtypes", harbourTypeRepository.findAll());
+        model.addAttribute("services", serviceRepository.findAll());
         return "newharbour";
     }
 
     @PostMapping("/savenewharbour")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String saveNewHarbour(@ModelAttribute Harbour harbour){
+    public String saveNewHarbour(@ModelAttribute Harbour harbour, @RequestParam(value = "selectedServices", required = false) List<Long> selectedServices){
+        harbourRepository.save(harbour);
+        if (selectedServices != null) {
+            for(Long serviceId : selectedServices){
+                Service service = serviceRepository.findById(serviceId).orElse(null);
+                if (service != null) {
+                    service.addHarbours(harbour);
+                    serviceRepository.save(service);
+                }
+            }
+        }
         harbourRepository.save(harbour);
         return "redirect:/harbourlist";
     }

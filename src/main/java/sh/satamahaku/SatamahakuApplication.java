@@ -51,9 +51,9 @@ public class SatamahakuApplication {
 			
 			
 			// Services for harbours
-			Service service1 = new Service("Wc","Wc-tilat monipuolisesti");
-			Service service2 = new Service("Tankkaus","Diesel sekä Bensiinin tankkaus satamassa");
-			Service service3 = new Service("Sauna","Naisille ja miehille omat saunatilat");
+			Service service1 = new Service("Wc");
+			Service service2 = new Service("Tankkaus");
+			Service service3 = new Service("Sauna");
 
 			// save services
 			serviceRepository.save(service1);

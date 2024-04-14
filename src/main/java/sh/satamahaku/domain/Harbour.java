@@ -47,9 +47,9 @@ public class Harbour {
     private List<Service> services = new ArrayList<>();
 
     
-    // public void addServices(Service service){
-    //     services.add(service);
-    // }
+    public void addService(Service service){
+        services.add(service);
+    }
 
     // public void addFavorites(User usersfavorite){
     //     favouriteByUser.add(usersfavorite);
@@ -57,6 +57,7 @@ public class Harbour {
     public boolean isFavoritedByUser(User user) {
         return favouriteByUser.contains(user);
     }
+
 
 // Constructors
 
@@ -68,16 +69,16 @@ public Harbour() {
     this.numberOfPlaces = null;
     this.description = null;
     this.harbourType = null;
-    this.services = null;
 }
 
 
-    public Harbour(String name, String coordinates, Integer numberOfPlaces, String description, HarbourType harbourType, Service services) {
+    public Harbour(String name, String coordinates, Integer numberOfPlaces, String description, HarbourType harbourType, List<Service> services) {
         this.name = name;
         this.coordinates = coordinates;
         this.numberOfPlaces = numberOfPlaces;
         this.description = description;
         this.harbourType = harbourType;
+        this.services = services;
     }
 
 
@@ -148,7 +149,6 @@ public Harbour() {
         return "Harbour [harbourid=" + harbourid + ", name=" + name + ", coordinates=" + coordinates
                 + ", numberOfPlaces=" + numberOfPlaces + ", description=" + description + "]";
     }
-
 
     
 }

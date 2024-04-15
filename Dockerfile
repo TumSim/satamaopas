@@ -13,4 +13,4 @@ FROM eclipse-temurin:17-jre-focal
 # StudentListSecureDB-0.0.1-SNAPSHOT.jar  = <artifactId>-<version>.jar (pom.xml)
 COPY --from=build /home/app/target/StudentListSecureDB-0.0.1-SNAPSHOT.jar /usr/local/lib/studentlistsecuredb.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/usr/local/lib/studentlistsecuredb.jar"]
+ENTRYPOINT ["java", "-jar", "/usr/local/lib/satamahaku-0.0.1-SNAPSHOT.jar"]

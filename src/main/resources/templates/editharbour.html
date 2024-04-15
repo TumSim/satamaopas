@@ -19,13 +19,6 @@
                     th:text="${harbourtype.harbourType}">
             </option>
         </select>
-        <label>Services:</label><br>
-        <div th:each="service : ${services}">
-            <input type="checkbox" th:id="'service_' + ${service.serviceid}" 
-                   th:name="'selectedServices'" th:value="${service.serviceid}" 
-                   th:checked="${harbourid.services != null and harbourid.services.contains(service)}">
-            <label th:for="'service_' + ${service.serviceid}" th:text="${service.service}"></label><br>
-        </div>
         <input type="submit" value="Save Changes">
     </form>
 </body>

@@ -3,6 +3,8 @@ package sh.satamahaku.web;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -90,13 +92,6 @@ public class HarbourController {
             }
         }
         harbourRepository.save(harbour);
-        return "redirect:/harbourlist";
-    }
-
-    @RequestMapping("/deleteHarbour/{harbourid}")  // Deleting selected harbour from harbours, only for Admin user
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public String deleteHarbour(@PathVariable("harbourid") Long harbourid){
-        harbourRepository.deleteById(harbourid);
         return "redirect:/harbourlist";
     }
 

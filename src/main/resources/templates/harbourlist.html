@@ -65,11 +65,6 @@
         <td>
           <a th:href="@{/editHarbour/{harbourid}(harbourid=${harbour.harbourid})}" class="btn btn-primary btn-sm" sec:authorize="hasAuthority('ADMIN')">Edit</a>
       </td>
-        <td>
-          <form th:action="@{/deleteHarbour/{harbourid}(harbourid=${harbour.harbourid})}" method="post">
-              <button type="submit" sec:authorize="hasAuthority('ADMIN')" class="btn btn-danger btn-sm">Delete</button>
-          </form>
-      </td>
       </tr>
     </tbody>
   </table>

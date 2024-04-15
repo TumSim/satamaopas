@@ -10,7 +10,8 @@ RUN mvn -f /home/app/pom.xml clean package
 # Jar Package
 #
 FROM eclipse-temurin:17-jre-focal
-# Copy the JAR file from the build stage to the destination
-COPY --from=build /home/app/target/satamahaku-0.0.1-SNAPSHOT.jar /usr/local/lib/satamahaku.jar
+# Copy the JAR file from the target directory to the destination
+COPY target/classes/satamahaku-0.0.1-SNAPSHOT.jar /usr/local/lib/satamahaku.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/usr/local/lib/satamahaku-0.0.1-SNAPSHOT.jar"]
+# Specify the correct name of the JAR file in the entrypoint
+ENTRYPOINT ["java", "-jar", "/usr/local/lib/satamahaku.jar"]
